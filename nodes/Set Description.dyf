@@ -23,9 +23,14 @@ try:
 	
 	param = 'Description'
 	data = map(lambda x: x.LookupParameter(param).Set(arg2), arg1)
+	
+	TM.Instance.TransactionTaskDone()
 
 except:
 	TM.Instance.ForceCloseTransaction()
+	
+finally:
+	TM.Instance.TransactionTaskDone()
 
 #Assign your output to the OUT variable.
 OUT = data</Script>

@@ -1,4 +1,4 @@
-<Workspace Version="1.3.4.6666" X="-229.206740449549" Y="-205.033441558777" zoom="1.53734613284105" ScaleFactor="1" Name="Set COBie.Type.Description" Description="Sets the value for COBie.TypeDescription parameter" ID="d03da34d-e178-4441-bfe0-507d51cc9d9a" Category="Teascripts.Transactions.ElementTypes">
+<Workspace Version="1.3.4.6666" X="8.6060076540042" Y="-111.74288265861" zoom="1.09875091045556" ScaleFactor="1" Name="Set COBie.Type.Description" Description="Sets the value for COBie.TypeDescription parameter" ID="d03da34d-e178-4441-bfe0-507d51cc9d9a" Category="Teascripts.Transactions.ElementTypes">
   <NamespaceResolutionMap />
   <Elements>
     <PythonNodeModels.PythonNode guid="a88961c6-51b5-46f3-8c9f-1b88b4af8208" type="PythonNodeModels.PythonNode" nickname="Python Script" x="524.873963509867" y="290.679622719367" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" inputcount="2">
@@ -23,9 +23,14 @@ try:
 	
 	param = 'COBie.Type.Description'
 	data = map(lambda x: x.LookupParameter(param).Set(arg2), arg1)
+	
+	TM.Instance.TransactionTaskDone()
 
 except:
 	TM.Instance.ForceCloseTransaction()
+	
+finally:
+	TM.Instance.TransactionTaskDone()
 
 #Assign your output to the OUT variable.
 OUT = data</Script>

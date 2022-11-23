@@ -27,6 +27,9 @@ try:
 	
 except:
 	TM.Instance.ForceCloseTransaction()
+	
+finally:
+	TM.Instance.TransactionTaskDone()
 
 #Assign your output to the OUT variable.
 OUT = data</Script>
