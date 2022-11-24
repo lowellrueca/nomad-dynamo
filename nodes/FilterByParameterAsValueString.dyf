@@ -1,4 +1,4 @@
-<Workspace Version="1.3.4.6666" X="-166.260371762731" Y="-188.785999265293" zoom="1.49364430808002" ScaleFactor="1" Name="Filter by Parameter Value As String" Description="Filters the elements by parameter value" ID="c7f810a7-f9b3-48b8-9453-7fffd9186c64" Category="Teascripts.Filter">
+<Workspace Version="1.3.4.6666" X="-166.260371762731" Y="-188.785999265293" zoom="1.49364430808002" ScaleFactor="1" Name="Filter by Parameter As Value String" Description="Filters the elements by parameter value using AsValueString method" ID="c7f810a7-f9b3-48b8-9453-7fffd9186c64" Category="Teascripts.Filter">
   <NamespaceResolutionMap />
   <Elements>
     <PythonNodeModels.PythonNode guid="ecdcdb3d-091a-4831-9a87-4b5a47fd3722" type="PythonNodeModels.PythonNode" nickname="Python Script" x="451.2" y="289.6" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" inputcount="3">
