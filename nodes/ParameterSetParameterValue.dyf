@@ -35,7 +35,7 @@ finally:
 OUT = out</Script>
     </PythonNodeModels.PythonNode>
     <Dynamo.Graph.Nodes.CustomNodes.Symbol guid="03aa1b13-fcdc-4d9f-a2e6-064be589ba08" type="Dynamo.Graph.Nodes.CustomNodes.Symbol" nickname="Input" x="283.868951179624" y="217.004442077001" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
-      <Symbol value="Elements" />
+      <Symbol value="Elements or Element Types" />
     </Dynamo.Graph.Nodes.CustomNodes.Symbol>
     <Dynamo.Graph.Nodes.CustomNodes.Symbol guid="cead41ba-17c5-4bee-a355-e6e24af4132f" type="Dynamo.Graph.Nodes.CustomNodes.Symbol" nickname="Input" x="235.388939198533" y="284.482335183672" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
       <Symbol value="Parameter Name" />
