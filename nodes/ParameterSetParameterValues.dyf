@@ -1,0 +1,63 @@
+<Workspace Version="1.3.4.6666" X="-24.8017167196541" Y="-59.9828818091331" zoom="1.19179377129295" ScaleFactor="1" Name="Set Parameter Values" Description="Sets a list of parameter values for elements" ID="78c91f6d-3508-4e18-9c85-6060e86057f6" Category="Teascripts.Parameter.Set">
+  <NamespaceResolutionMap />
+  <Elements>
+    <PythonNodeModels.PythonNode guid="5989c005-3cef-4ee7-b638-5b54caf80c51" type="PythonNodeModels.PythonNode" nickname="Python Script" x="432.8" y="239.2" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" inputcount="3">
+      <PortInfo index="0" default="False" />
+      <PortInfo index="1" default="False" />
+      <PortInfo index="2" default="False" />
+      <Script>import clr
+
+clr.AddReference('RevitAPI')
+clr.AddReference('RevitServices')
+
+from Autodesk.Revit.DB import *
+from RevitServices.Persistence import DocumentManager as DM
+from RevitServices.Transactions import TransactionManager as TM
+
+#The inputs to this node will be stored as a list in the IN variables.
+elems = UnwrapElement(IN[0])
+paramName = IN[1]
+paramValues = IN[2]
+
+try:
+	doc = DM.Instance.CurrentDBDocument
+	TM.Instance.EnsureInTransaction(doc)
+
+	out = map(lambda x, y: x.LookupParameter(paramName).Set(y), elems, paramValues)
+	
+except:
+	TM.Instance.ForceCloseTransaction()
+	
+finally:
+	TM.Instance.TransactionTaskDone()
+
+#Assign your output to the OUT variable.
+OUT = out</Script>
+    </PythonNodeModels.PythonNode>
+    <Dynamo.Graph.Nodes.CustomNodes.Symbol guid="03aa1b13-fcdc-4d9f-a2e6-064be589ba08" type="Dynamo.Graph.Nodes.CustomNodes.Symbol" nickname="Input" x="283.868951179624" y="217.004442077001" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <Symbol value="Elements" />
+    </Dynamo.Graph.Nodes.CustomNodes.Symbol>
+    <Dynamo.Graph.Nodes.CustomNodes.Symbol guid="cead41ba-17c5-4bee-a355-e6e24af4132f" type="Dynamo.Graph.Nodes.CustomNodes.Symbol" nickname="Input" x="235.388939198533" y="284.482335183672" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <Symbol value="Parameter Name" />
+    </Dynamo.Graph.Nodes.CustomNodes.Symbol>
+    <Dynamo.Graph.Nodes.CustomNodes.Symbol guid="8a18cace-c904-496d-93a0-4014a51fa4cd" type="Dynamo.Graph.Nodes.CustomNodes.Symbol" nickname="Input" x="147.950731063533" y="354.480731248626" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <Symbol value="List of Parameter Values" />
+    </Dynamo.Graph.Nodes.CustomNodes.Symbol>
+    <Dynamo.Graph.Nodes.CustomNodes.Output guid="436ded4e-0e71-4256-8d68-42f40dd83b8b" type="Dynamo.Graph.Nodes.CustomNodes.Output" nickname="Output" x="604.746680341382" y="240.779228617817" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false">
+      <PortInfo index="0" default="False" />
+      <Symbol value="List of Transaction Result" />
+    </Dynamo.Graph.Nodes.CustomNodes.Output>
+  </Elements>
+  <Connectors>
+    <Dynamo.Graph.Connectors.ConnectorModel start="5989c005-3cef-4ee7-b638-5b54caf80c51" start_index="0" end="436ded4e-0e71-4256-8d68-42f40dd83b8b" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="03aa1b13-fcdc-4d9f-a2e6-064be589ba08" start_index="0" end="5989c005-3cef-4ee7-b638-5b54caf80c51" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="cead41ba-17c5-4bee-a355-e6e24af4132f" start_index="0" end="5989c005-3cef-4ee7-b638-5b54caf80c51" end_index="1" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="8a18cace-c904-496d-93a0-4014a51fa4cd" start_index="0" end="5989c005-3cef-4ee7-b638-5b54caf80c51" end_index="2" portType="0" />
+  </Connectors>
+  <Notes />
+  <Annotations />
+  <Presets />
+  <Cameras>
+    <Camera Name="Background Preview" eyeX="-17" eyeY="24" eyeZ="50" lookX="12" lookY="-13" lookZ="-58" upX="0" upY="1" upZ="0" />
+  </Cameras>
+</Workspace>
