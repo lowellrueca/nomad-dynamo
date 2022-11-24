@@ -1,4 +1,4 @@
-<Workspace Version="1.3.4.6666" X="-1057.0471598152" Y="-734.374889828103" zoom="4" ScaleFactor="1" Name="Get Family Types by Family" Description="Retrieves all the family types by family" ID="39d92fd0-607d-4774-bd29-3b9b95bc0956" Category="Teascripts.Collections.Families">
+<Workspace Version="1.3.4.6666" X="-1057.0471598152" Y="-734.374889828103" zoom="4" ScaleFactor="1" Name="Get Family Types by Family" Description="Retrieves all the family types by family" ID="39d92fd0-607d-4774-bd29-3b9b95bc0956" Category="Teascripts.Collections.FamilyType">
   <NamespaceResolutionMap />
   <Elements>
     <Dynamo.Graph.Nodes.CustomNodes.Symbol guid="56228d98-ef15-4368-871f-75ed2e937900" type="Dynamo.Graph.Nodes.CustomNodes.Symbol" nickname="Input" x="145.483650405833" y="232.807568170183" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
