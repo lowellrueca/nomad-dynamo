@@ -1,4 +1,4 @@
-<Workspace Version="1.3.4.6666" X="-741.001117052575" Y="-318.565012766867" zoom="2.080710428125" ScaleFactor="1" Name="Element to Element Types" Description="Retrieves the Element Types from the Elements." ID="1cdcc1c6-cb6a-4058-a880-f8b230d7317f" Category="Teascripts.Mapping.Element">
+<Workspace Version="1.3.4.6666" X="-741.001117052575" Y="-318.565012766867" zoom="2.080710428125" ScaleFactor="1" Name="Get Element Types from Elements" Description="Retrieves the Element Types from the Elements." ID="1cdcc1c6-cb6a-4058-a880-f8b230d7317f" Category="Teascripts.Collections.ElementTypes">
   <NamespaceResolutionMap />
   <Elements>
     <PythonNodeModels.PythonNode guid="8f2f6c21-a9da-4a4f-b991-35cd06830c43" type="PythonNodeModels.PythonNode" nickname="Python Script" x="536.8" y="291.2" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" inputcount="1">
