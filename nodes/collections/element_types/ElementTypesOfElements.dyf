@@ -14,14 +14,14 @@ from Autodesk.Revit.DB import *
 from RevitServices.Persistence import DocumentManager as DM
 
 
+document = DM.Instance.CurrentDBDocument
 elements = UnwrapElement(IN[0])
-doc = DM.Instance.CurrentDBDocument
 
 element_ids = List[ElementId](map(lambda element: element.GetTypeId(), elements))
 
-data = FilteredElementCollector(doc, element_ids).WhereElementIsElementType().ToElements()
+out = FilteredElementCollector(document, element_ids).WhereElementIsElementType().ToElements()
 
-OUT = data
+OUT = out
 </Script>
     </PythonNodeModels.PythonNode>
     <Dynamo.Graph.Nodes.CustomNodes.Symbol guid="6ea0b613-1d78-493f-9459-c692acea1fee" type="Dynamo.Graph.Nodes.CustomNodes.Symbol" nickname="Input" x="397.4073500847" y="291.00711508669" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
