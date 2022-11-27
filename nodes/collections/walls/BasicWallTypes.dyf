@@ -10,21 +10,19 @@ clr.AddReference('RevitServices')
 from Autodesk.Revit.DB import *
 from RevitServices.Persistence import DocumentManager as DM
 
-doc = DM.Instance.CurrentDBDocument
 
-wallTypes = FilteredElementCollector(doc).OfCategory(BuiltInCategory.OST_Walls).OfClass(WallType).ToElements()
+document = DM.Instance.CurrentDBDocument
+
+wall_types = FilteredElementCollector(document).OfCategory(BuiltInCategory.OST_Walls).OfClass(WallType).ToElements()
 			
-basicWalls = filter(lambda w: w.Kind == WallKind.Basic, wallTypes)
+out = filter(lambda wall_type: wall_type.Kind.Equals(WallKind.Basic), wall_types)
 
-#The inputs to this node will be stored as a list in the IN variables.
-dataEnteringNode = IN
-
-#Assign your output to the OUT variable.
-OUT = basicWalls</Script>
+OUT = out
+</Script>
     </PythonNodeModels.PythonNode>
     <Dynamo.Graph.Nodes.CustomNodes.Output guid="6f42548d-2523-4c99-9479-9e0c9dda30f8" type="Dynamo.Graph.Nodes.CustomNodes.Output" nickname="Output" x="684.679519370561" y="367.161724951916" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false">
       <PortInfo index="0" default="False" />
-      <Symbol value="Basic Wall Types" />
+      <Symbol value="basic wall types" />
     </Dynamo.Graph.Nodes.CustomNodes.Output>
   </Elements>
   <Connectors>

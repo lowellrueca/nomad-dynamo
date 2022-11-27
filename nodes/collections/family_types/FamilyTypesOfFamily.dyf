@@ -3,7 +3,8 @@
   <Elements>
     <PythonNodeModels.PythonNode guid="fc1949d6-838c-4fb9-8924-6973935a88bc" type="PythonNodeModels.PythonNode" nickname="Python Script" x="504.904653706818" y="362.838819515909" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" inputcount="1">
       <PortInfo index="0" default="False" />
-      <Script>import clr
+      <Script>
+import clr
 
 clr.AddReference('RevitAPI')
 clr.AddReference('RevitServices')
@@ -12,26 +13,22 @@ from Autodesk.Revit.DB import *
 from RevitServices.Persistence import DocumentManager as DM
 
 
+document = DM.Instance.CurrentDBDocument
 family = UnwrapElement(IN[0])
 
-doc = DM.Instance.CurrentDBDocument
+familyTypes = FilteredElementCollector(document).OfCategoryId(family.FamilyCategoryId).WhereElementIsElementType().ToElements()
 
-elementClassFilter = ElementClassFilter(ElementType)
+out = filter(lambda ft: ft.Family.Id.Equals(family.Id), familyTypes)
 
-familyTypes = FilteredElementCollector(doc).OfCategoryId(family.FamilyCategoryId).WherePasses(elementClassFilter).WhereElementIsElementType().ToElements()
-
-data = filter(lambda ft: ft.Family.Id.Equals(family.Id), familyTypes)
-
-out = family, data
-
-OUT = out</Script>
+OUT = out
+</Script>
     </PythonNodeModels.PythonNode>
     <Dynamo.Graph.Nodes.CustomNodes.Symbol guid="2184e538-590c-4444-885e-1ce54dbc2135" type="Dynamo.Graph.Nodes.CustomNodes.Symbol" nickname="Input" x="394.530922254672" y="362.996800362765" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
-      <Symbol value="Family" />
+      <Symbol value="family" />
     </Dynamo.Graph.Nodes.CustomNodes.Symbol>
     <Dynamo.Graph.Nodes.CustomNodes.Output guid="e0ba25b1-6c31-4f64-95b6-e5941d57db97" type="Dynamo.Graph.Nodes.CustomNodes.Output" nickname="Output" x="662.429112306156" y="365.262688512235" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false">
       <PortInfo index="0" default="False" />
-      <Symbol value="Family and List of Family Types" />
+      <Symbol value="list of family types" />
     </Dynamo.Graph.Nodes.CustomNodes.Output>
   </Elements>
   <Connectors>

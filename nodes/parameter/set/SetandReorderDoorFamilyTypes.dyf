@@ -12,22 +12,22 @@ from Autodesk.Revit.DB import *
 from RevitServices.Persistence import DocumentManager as DM
 from RevitServices.Transactions import TransactionManager as TM
 
-#The inputs to this node will be stored as a list in the IN variables.
-elems = UnwrapElement(IN[0])
 
-getDim = lambda x, dim: UnitUtils.Convert(x.LookupParameter(dim).AsDouble(), DisplayUnitType.DUT_DECIMAL_FEET, DisplayUnitType.DUT_MILLIMETERS)
+document = DM.Instance.CurrentDBDocument
+elements = UnwrapElement(IN[0])
 
-genNum = lambda x: elems.IndexOf(x)+1
+get_dim = lambda x, dim: UnitUtils.Convert(x.LookupParameter(dim).AsDouble(), DisplayUnitType.DUT_DECIMAL_FEET, DisplayUnitType.DUT_MILLIMETERS)
 
-genName = lambda x: "{0} - {1} x {2}".format(genNum(x), getDim(x, "Width"), getDim(x, "Height"))
+generate_num = lambda element: elements.IndexOf(element)+1
+
+generate_name = lambda element: "{0} - {1} x {2}".format(generate_num(element), get_dim(element, "Width"), get_dim(element, "Height"))
 
 try:
-	doc = DM.Instance.CurrentDBDocument
-	TM.Instance.EnsureInTransaction(doc)
+	TM.Instance.EnsureInTransaction(document)
 	
-	map(lambda x: Element.Name.SetValue(x, genName(x)), elems)
+	map(lambda element: Element.Name.SetValue(element, generate_name(x)), elements)
 	
-	out = map(lambda x: Element.Name.GetValue(x), elems)
+	out = map(lambda element: Element.Name.GetValue(element), elements)
 	
 except:
 	TM.Instance.ForceCloseTransaction()
@@ -35,15 +35,15 @@ except:
 finally:
 	TM.Instance.TransactionTaskDone()
 
-#Assign your output to the OUT variable.
-OUT = out</Script>
+OUT = out
+</Script>
     </PythonNodeModels.PythonNode>
     <Dynamo.Graph.Nodes.CustomNodes.Symbol guid="7c6bb920-c0c6-4c54-8da4-641ec01b349e" type="Dynamo.Graph.Nodes.CustomNodes.Symbol" nickname="Input" x="34.8654494707015" y="306.185658433355" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
-      <Symbol value="List of Door Family Types" />
+      <Symbol value="list of door family types" />
     </Dynamo.Graph.Nodes.CustomNodes.Symbol>
     <Dynamo.Graph.Nodes.CustomNodes.Output guid="d3aeb56f-7d72-4ace-a22b-43d1f09f7701" type="Dynamo.Graph.Nodes.CustomNodes.Output" nickname="Output" x="493.914153289617" y="304.406210323317" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false">
       <PortInfo index="0" default="False" />
-      <Symbol value="List of Door Family Type Names" />
+      <Symbol value="list of door family type names" />
     </Dynamo.Graph.Nodes.CustomNodes.Output>
   </Elements>
   <Connectors>

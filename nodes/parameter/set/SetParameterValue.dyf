@@ -5,7 +5,8 @@
       <PortInfo index="0" default="False" />
       <PortInfo index="1" default="False" />
       <PortInfo index="2" default="False" />
-      <Script>import clr
+      <Script>
+import clr
 
 clr.AddReference('RevitAPI')
 clr.AddReference('RevitServices')
@@ -14,16 +15,16 @@ from Autodesk.Revit.DB import *
 from RevitServices.Persistence import DocumentManager as DM
 from RevitServices.Transactions import TransactionManager as TM
 
-#The inputs to this node will be stored as a list in the IN variables.
-elems = UnwrapElement(IN[0])
-paramName = IN[1]
-paramValue = IN[2]
+
+document = DM.Instance.CurrentDBDocument
+elements = UnwrapElement(IN[0])
+parameter_name = IN[1]
+parameter_value = IN[2]
 
 try:
-	doc = DM.Instance.CurrentDBDocument
-	TM.Instance.EnsureInTransaction(doc)
+	TM.Instance.EnsureInTransaction(document)
 
-	out = map(lambda x: x.LookupParameter(paramName).Set(paramValue), elems)
+	out = map(lambda element: element.LookupParameter(parameter_name).Set(parameter_value), elements)
 	
 except:
 	TM.Instance.ForceCloseTransaction()
@@ -31,21 +32,21 @@ except:
 finally:
 	TM.Instance.TransactionTaskDone()
 
-#Assign your output to the OUT variable.
-OUT = out</Script>
+OUT = out
+</Script>
     </PythonNodeModels.PythonNode>
     <Dynamo.Graph.Nodes.CustomNodes.Symbol guid="03aa1b13-fcdc-4d9f-a2e6-064be589ba08" type="Dynamo.Graph.Nodes.CustomNodes.Symbol" nickname="Input" x="283.868951179624" y="217.004442077001" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
-      <Symbol value="Elements or Element Types" />
+      <Symbol value="elements or element types" />
     </Dynamo.Graph.Nodes.CustomNodes.Symbol>
     <Dynamo.Graph.Nodes.CustomNodes.Symbol guid="cead41ba-17c5-4bee-a355-e6e24af4132f" type="Dynamo.Graph.Nodes.CustomNodes.Symbol" nickname="Input" x="235.388939198533" y="284.482335183672" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
-      <Symbol value="Parameter Name" />
+      <Symbol value="parameter name" />
     </Dynamo.Graph.Nodes.CustomNodes.Symbol>
     <Dynamo.Graph.Nodes.CustomNodes.Symbol guid="8a18cace-c904-496d-93a0-4014a51fa4cd" type="Dynamo.Graph.Nodes.CustomNodes.Symbol" nickname="Input" x="227.159065822312" y="359.179530768215" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
-      <Symbol value="Parameter Value" />
+      <Symbol value="parameter value" />
     </Dynamo.Graph.Nodes.CustomNodes.Symbol>
     <Dynamo.Graph.Nodes.CustomNodes.Output guid="436ded4e-0e71-4256-8d68-42f40dd83b8b" type="Dynamo.Graph.Nodes.CustomNodes.Output" nickname="Output" x="604.746680341382" y="240.779228617817" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false">
       <PortInfo index="0" default="False" />
-      <Symbol value="List of Transaction Result" />
+      <Symbol value="list of transaction result" />
     </Dynamo.Graph.Nodes.CustomNodes.Output>
   </Elements>
   <Connectors>

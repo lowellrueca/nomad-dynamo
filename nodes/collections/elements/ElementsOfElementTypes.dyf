@@ -1,9 +1,10 @@
-<Workspace Version="1.3.3.4111" X="-868.175375189463" Y="-651.256863146569" zoom="2.45244625" ScaleFactor="1" Name="Elements of Element Types" Description="Retrieves the elements of element type" ID="b90ef956-0031-47fe-a951-f6b3db29ea80" Category="Teascripts.Collections.Element">
+<Workspace Version="1.3.3.4111" X="-687.250557939288" Y="-462.695470371763" zoom="1.94350882104308" ScaleFactor="1" Name="Elements of Element Type" Description="Retrieves the elements of element type" ID="b90ef956-0031-47fe-a951-f6b3db29ea80" Category="Teascripts.Collections.Element">
   <NamespaceResolutionMap />
   <Elements>
     <PythonNodeModels.PythonNode guid="737cec60-ed0c-4cd2-977a-f98a82e967f0" type="PythonNodeModels.PythonNode" nickname="Python Script" x="560.311748593726" y="390.628892305635" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" inputcount="1">
       <PortInfo index="0" default="False" />
-      <Script>import clr
+      <Script>
+import clr
 
 clr.AddReference('RevitAPI')
 clr.AddReference('RevitServices')
@@ -12,32 +13,23 @@ from Autodesk.Revit.DB import *
 from RevitServices.Persistence import DocumentManager as DM
 
 
-out = []
+document = DM.Instance.CurrentDBDocument
+element_type = UnwrapElement(IN[0])
 
-try:
-	# Element Type
-	et = UnwrapElement(IN[0])
-	
-	doc = DM.Instance.CurrentDBDocument
-	
-	elements = FilteredElementCollector(doc).OfCategoryId(et.Category.Id).WhereElementIsNotElementType().ToElements()
-	
-	# Elements of Element Type
-	eet = filter(lambda e: e.GetTypeId().Equals(et.Id), elements)
-	
-	out = et, eet
+elements = FilteredElementCollector(document).OfCategoryId(element_type.Category.Id).WhereElementIsNotElementType().ToElements()
+elements_of_element_type = filter(lambda element: element.GetTypeId().Equals(element_type.Id), elements)
 
-except AttributeError:
-	pass
+out = element_type, elements_of_element_type
 
-OUT = out</Script>
+OUT = out
+</Script>
     </PythonNodeModels.PythonNode>
     <Dynamo.Graph.Nodes.CustomNodes.Symbol guid="0d582ca5-c157-4206-ba19-23e0c8219208" type="Dynamo.Graph.Nodes.CustomNodes.Symbol" nickname="Input" x="390.14930366502" y="390.321114328007" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
-      <Symbol value="Element Type" />
+      <Symbol value="element type" />
     </Dynamo.Graph.Nodes.CustomNodes.Symbol>
     <Dynamo.Graph.Nodes.CustomNodes.Output guid="397f8b63-825a-4a6a-8e20-abd089098996" type="Dynamo.Graph.Nodes.CustomNodes.Output" nickname="Output" x="721.007836242213" y="390.785218128283" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false">
       <PortInfo index="0" default="False" />
-      <Symbol value="Element Type and List of Elements" />
+      <Symbol value="element type and elements" />
     </Dynamo.Graph.Nodes.CustomNodes.Output>
   </Elements>
   <Connectors>

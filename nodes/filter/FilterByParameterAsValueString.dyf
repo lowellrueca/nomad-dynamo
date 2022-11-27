@@ -5,34 +5,34 @@
       <PortInfo index="0" default="False" />
       <PortInfo index="1" default="False" />
       <PortInfo index="2" default="False" />
-      <Script>import clr
+      <Script>
+import clr
 
 clr.AddReference('RevitAPI')
 
 from Autodesk.Revit.DB import *
 
-#The inputs to this node will be stored as a list in the IN variables.
-elems = UnwrapElement(IN[0])
-paramName = IN[1]
-paramVal = IN[2]
+elements = UnwrapElement(IN[0])
+parameter_name = IN[1]
+parameter_value = IN[2]
 
-out = filter(lambda x: x.LookupParameter(paramName).AsValueString().Equals(paramVal), elems)
+out = filter(lambda element: element.LookupParameter(parameter_name).AsValueString().Equals(parameter_value), elements)
 
-#Assign your output to the OUT variable.
-OUT = out</Script>
+OUT = out
+</Script>
     </PythonNodeModels.PythonNode>
     <Dynamo.Graph.Nodes.CustomNodes.Symbol guid="d0efe917-ea8f-405e-81bf-c80674642772" type="Dynamo.Graph.Nodes.CustomNodes.Symbol" nickname="Input" x="157.34318438505" y="302.787479397186" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
-      <Symbol value="Elements or Element Types" />
+      <Symbol value="element or  element type" />
     </Dynamo.Graph.Nodes.CustomNodes.Symbol>
     <Dynamo.Graph.Nodes.CustomNodes.Symbol guid="4c51a6e1-0356-4057-89ed-3bed1b6b5476" type="Dynamo.Graph.Nodes.CustomNodes.Symbol" nickname="Input" x="243.750932565286" y="371.027273039165" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
-      <Symbol value="Parameter Name" />
+      <Symbol value="parameter name" />
     </Dynamo.Graph.Nodes.CustomNodes.Symbol>
     <Dynamo.Graph.Nodes.CustomNodes.Symbol guid="95c6c3f9-859e-47b3-b66c-8e44aa45fac3" type="Dynamo.Graph.Nodes.CustomNodes.Symbol" nickname="Input" x="235.919959290233" y="443.674787580965" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
-      <Symbol value="Parameter Value" />
+      <Symbol value="parameter value" />
     </Dynamo.Graph.Nodes.CustomNodes.Symbol>
     <Dynamo.Graph.Nodes.CustomNodes.Output guid="7c834154-f185-4b92-aaf4-cc8df0db8b04" type="Dynamo.Graph.Nodes.CustomNodes.Output" nickname="Output" x="615.834573327103" y="293.995922386328" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false">
       <PortInfo index="0" default="False" />
-      <Symbol value="Elements" />
+      <Symbol value="elements or element types" />
     </Dynamo.Graph.Nodes.CustomNodes.Output>
   </Elements>
   <Connectors>

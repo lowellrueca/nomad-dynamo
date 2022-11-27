@@ -1,9 +1,10 @@
-<Workspace Version="1.3.4.6666" X="-235.234474341779" Y="-222.464202596404" zoom="1.26333177263822" ScaleFactor="1" Name="Get Family Types By Category" Description="Retrieves the family types grouped by family." ID="4aa747c7-e0b3-4078-82fe-f081dfed6c3d" Category="Teascripts.Collections.FamilyType">
+<Workspace Version="1.3.4.6666" X="-235.234474341779" Y="-222.464202596404" zoom="1.26333177263822" ScaleFactor="1" Name="Family Types By Category" Description="Retrieves the family types grouped by family." ID="4aa747c7-e0b3-4078-82fe-f081dfed6c3d" Category="Teascripts.Collections.FamilyType">
   <NamespaceResolutionMap />
   <Elements>
     <PythonNodeModels.PythonNode guid="f6b64f14-5d48-4b14-8733-4e93b2b2f80f" type="PythonNodeModels.PythonNode" nickname="Python Script" x="505.883858610586" y="411.201020669942" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" inputcount="1">
       <PortInfo index="0" default="False" />
-      <Script>import clr
+      <Script>
+import clr
 
 clr.AddReference('RevitAPI')
 clr.AddReference('RevitServices')
@@ -12,36 +13,29 @@ from System.Collections.Generic import *
 from Autodesk.Revit.DB import *
 from RevitServices.Persistence import DocumentManager as DM
 
-#The inputs to this node will be stored as a list in the IN variables.
-cat = UnwrapElement(IN[0])
 
-doc = DM.Instance.CurrentDBDocument
+document = DM.Instance.CurrentDBDocument
+category = UnwrapElement(IN[0])
 
-familyClassFilter = ElementClassFilter(Family)
+families = FilteredElementCollector(document).WherePasses(ElementClassFilter(Family))
 
-elemClassFilter = ElementClassFilter(ElementType)
+filtered_families = filter(lambda x: x.FamilyCategoryId.Equals(category.Id), families)
 
-cat = Category.GetCategory(doc, cat)
+get_family_symbols = lambda family: FilteredElementCollector(document, family.GetFamilySymbolIds()).WherePasses(ElementClassFilter(ElementType))
 
-familyCollector = FilteredElementCollector(doc).WherePasses(familyClassFilter)
+family_symbols = map(lambda family: get_family_symbols(family), filtered_families)
 
-families = filter(lambda x: x.FamilyCategoryId.Equals(cat.Id), familyCollector)
+out = map(lambda x: [y for y in x], family_symbols)
 
-getfamilySymbols = lambda e: FilteredElementCollector(doc, e.GetFamilySymbolIds()).WherePasses(elemClassFilter)
-
-familySymbols = map(lambda x: getfamilySymbols(x), families)
-
-out = map(lambda x: [y for y in x], familySymbols)
-
-#Assign your output to the OUT variable.
-OUT = out</Script>
+OUT = out
+</Script>
     </PythonNodeModels.PythonNode>
     <Dynamo.Graph.Nodes.CustomNodes.Symbol guid="fb63d2b2-8dff-4ff9-bf31-0ef4dfc4f09b" type="Dynamo.Graph.Nodes.CustomNodes.Symbol" nickname="Input" x="301.638740398607" y="410.542670770605" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
-      <Symbol value="BuiltIn Category" />
+      <Symbol value="category" />
     </Dynamo.Graph.Nodes.CustomNodes.Symbol>
     <Dynamo.Graph.Nodes.CustomNodes.Output guid="744da6e6-6aff-4990-918f-ccf1329cc74a" type="Dynamo.Graph.Nodes.CustomNodes.Output" nickname="Output" x="683.15761554901" y="412.643699282335" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false">
       <PortInfo index="0" default="False" />
-      <Symbol value="List of Family Types by Family" />
+      <Symbol value="list of family types by family" />
     </Dynamo.Graph.Nodes.CustomNodes.Output>
   </Elements>
   <Connectors>

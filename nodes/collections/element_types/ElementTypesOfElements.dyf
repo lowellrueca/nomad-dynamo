@@ -1,9 +1,10 @@
-<Workspace Version="1.3.4.6666" X="-741.001117052575" Y="-318.565012766867" zoom="2.080710428125" ScaleFactor="1" Name="Get Element Types from Elements" Description="Retrieves the Element Types from the Elements." ID="1cdcc1c6-cb6a-4058-a880-f8b230d7317f" Category="Teascripts.Collections.ElementTypes">
+<Workspace Version="1.3.4.6666" X="-741.001117052575" Y="-318.565012766867" zoom="2.080710428125" ScaleFactor="1" Name="Element Types of Elements" Description="Retrieves the element types from the elements." ID="1cdcc1c6-cb6a-4058-a880-f8b230d7317f" Category="Teascripts.Collections.ElementTypes">
   <NamespaceResolutionMap />
   <Elements>
     <PythonNodeModels.PythonNode guid="8f2f6c21-a9da-4a4f-b991-35cd06830c43" type="PythonNodeModels.PythonNode" nickname="Python Script" x="536.8" y="291.2" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" inputcount="1">
       <PortInfo index="0" default="False" />
-      <Script>import clr
+      <Script>
+import clr
 
 clr.AddReference('RevitAPI')
 clr.AddReference('RevitServices')
@@ -12,24 +13,23 @@ from System.Collections.Generic import List
 from Autodesk.Revit.DB import *
 from RevitServices.Persistence import DocumentManager as DM
 
+
+elements = UnwrapElement(IN[0])
 doc = DM.Instance.CurrentDBDocument
 
-#The inputs to this node will be stored as a list in the IN variables.
-arg1 = UnwrapElement(IN[0])
+element_ids = List[ElementId](map(lambda element: element.GetTypeId(), elements))
 
-eids = List[ElementId](map(lambda x: x.GetTypeId(), arg1))
+data = FilteredElementCollector(doc, element_ids).WhereElementIsElementType().ToElements()
 
-data = FilteredElementCollector(doc, eids).WhereElementIsElementType().ToElements()
-
-#Assign your output to the OUT variable.
-OUT = data</Script>
+OUT = data
+</Script>
     </PythonNodeModels.PythonNode>
     <Dynamo.Graph.Nodes.CustomNodes.Symbol guid="6ea0b613-1d78-493f-9459-c692acea1fee" type="Dynamo.Graph.Nodes.CustomNodes.Symbol" nickname="Input" x="397.4073500847" y="291.00711508669" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
-      <Symbol value="Elements" />
+      <Symbol value="elements" />
     </Dynamo.Graph.Nodes.CustomNodes.Symbol>
     <Dynamo.Graph.Nodes.CustomNodes.Output guid="10e4ca63-0129-4f12-9d11-600b358e6527" type="Dynamo.Graph.Nodes.CustomNodes.Output" nickname="Output" x="702.10867853334" y="292.038928834398" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false">
       <PortInfo index="0" default="False" />
-      <Symbol value="Element Types" />
+      <Symbol value="element types" />
     </Dynamo.Graph.Nodes.CustomNodes.Output>
   </Elements>
   <Connectors>
