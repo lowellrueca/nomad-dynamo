@@ -45,10 +45,16 @@ def set_cobie_type_category(et):
 
     :param et: the element type
     """
-    omniclass_number = et.LookupParameter('OmniClass Number').AsValueString()
-    omniclass_title = et.LookupParameter('OmniClass Title').AsValueString()
+    bip_oc = BuiltInParameter.OMNICLASS_CODE
+    bip_od = BuiltInParameter.OMNICLASS_DESCRIPTION
+
+    omniclass_number = et.get_Parameter(bip_oc).AsString()
+    omniclass_title = et.get_Parameter(bip_od).AsString()
+    
     category = str.format('{0}: {1}', omniclass_number, omniclass_title)
-    et.LookupParameter('COBie.Type.Category').Set(category)
+
+    param_name = 'COBie.Type.Category'
+    et.LookupParameter(param_name).Set(category)
 
 def set_cobie_type_description(et):
     """
