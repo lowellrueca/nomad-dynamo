@@ -1,0 +1,56 @@
+<Workspace Version="1.3.4.6666" X="-854.406411821574" Y="-1029.83094121438" zoom="3.4" ScaleFactor="1" Name="Set COBie.Type.Category" Description="Sets the parameter values for COBie.Type.Category parameter" ID="53478015-032e-409d-a6e7-a9ecdf230a49" Category="Teascripts.Parameter.Set.COBieType">
+  <NamespaceResolutionMap />
+  <Elements>
+    <PythonNodeModels.PythonNode guid="69d6cbea-e6d7-4e31-9715-fbf28ddbf621" type="PythonNodeModels.PythonNode" nickname="Python Script" x="469.485808226344" y="406.628547943414" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" inputcount="1">
+      <PortInfo index="0" default="False" />
+      <Script>import clr
+import sys
+
+sys.path.append('C:/ProgramData/Dynamo/Dynamo Revit/1.3/definitions/teascripts-dynamo/')
+
+clr.AddReference('RevitServices')
+
+from core import *
+from RevitServices.Persistence import DocumentManager as DM
+from RevitServices.Transactions import TransactionManager as TM
+
+
+doc = DM.Instance.CurrentDBDocument
+out = []
+
+# data entering node
+in_0 = UnwrapElement(IN[0])
+
+
+element_types = in_0
+param_name = 'COBie.Type.Category'
+
+try:
+    TM.Instance.EnsureInTransaction(doc)
+    map(lambda et: set_cobie_type_category(et), element_types)
+
+    out = map(lambda et: et.LookupParameter(param_name).AsString(), element_types)
+
+except:
+    TM.Instance.ForceCloseTransaction()
+
+finally:
+    TM.Instance.TransactionTaskDone()
+
+OUT = out
+</Script>
+    </PythonNodeModels.PythonNode>
+    <Dynamo.Graph.Nodes.CustomNodes.Symbol guid="c492928f-922c-4b6b-a03b-89b352243a4e" type="Dynamo.Graph.Nodes.CustomNodes.Symbol" nickname="Input" x="294.825415241639" y="408.656159180701" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <Symbol value="element types" />
+    </Dynamo.Graph.Nodes.CustomNodes.Symbol>
+  </Elements>
+  <Connectors>
+    <Dynamo.Graph.Connectors.ConnectorModel start="c492928f-922c-4b6b-a03b-89b352243a4e" start_index="0" end="69d6cbea-e6d7-4e31-9715-fbf28ddbf621" end_index="0" portType="0" />
+  </Connectors>
+  <Notes />
+  <Annotations />
+  <Presets />
+  <Cameras>
+    <Camera Name="Background Preview" eyeX="0.982735753059387" eyeY="35.1169700622559" eyeZ="51.228832244873" lookX="12" lookY="-13" lookZ="-58" upX="0" upY="1" upZ="0" />
+  </Cameras>
+</Workspace>
