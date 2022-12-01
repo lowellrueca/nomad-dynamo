@@ -42,7 +42,7 @@ def created_on():
 
 def get_size(et, *args):
     """
-    Tries to retrieve the number alues from the parameter names
+    Retrieves the values from the parameter names to get the size as description
 
     :param et: the element type
     :param args: parameter names
