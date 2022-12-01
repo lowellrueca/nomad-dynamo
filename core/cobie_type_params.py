@@ -61,8 +61,11 @@ def set_cobie_type_description(et):
 
     :param et: the element type
     """
-    description = et.LookupParameter('Description').AsString()
-    et.LookupParameter('COBie.Type.Description').Set(description)
+    param_name = 'COBie.Type.Description'
+    bip = BuiltInParameter.ALL_MODEL_DESCRIPTION
+    
+    description = et.get_Parameter(bip).AsString()
+    et.LookupParameter(param_name).Set(description)
 
 def set_cobie_type_name(et):
     """
