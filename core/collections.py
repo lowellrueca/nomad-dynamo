@@ -18,7 +18,7 @@ def collect_families_by_category(category):
     :returns: families of the category
     """
     families = FilteredElementCollector(__document__).OfClass(Family).WhereElementIsNotElementType()
-    return filter(lambda f: f.FamilyCategoryId.Equals(category.Id), families)
+    return filter(lambda f: f.FamilyCategoryId.Equals(category.Id) and f.IsInPlace.Equals(False), families)
 
 def collect_element_types_by_category(category):
     """
