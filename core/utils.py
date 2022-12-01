@@ -24,15 +24,15 @@ def created_on():
     :returns: string formatted date and time in the form of 2000-01-01T08:10:10
     """
     dt_now = datetime.now()
-    year = dt_now.year.ToString()
-    month = dt_now.month.ToString()
-    day = dt_now.day.ToString()
+    year = dt_now.year
+    month = dt_now.month
+    day = dt_now.day
 
     yy_mm_dd = str.format('{0}-{1}-{2}', year, month, day)
 
-    hour = dt_now.hour.ToString()
-    minute = dt_now.minute.ToString()
-    second = dt_now.second.ToString()
+    hour = dt_now.hour
+    minute = dt_now.minute
+    second = dt_now.second
 
     hh_mm_ss = str.format('T{0}:{1}:{2}', hour, minute, second)
 
