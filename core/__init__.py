@@ -15,7 +15,7 @@ from collections import (
     element_types_of_elements,
     elements_of_element_types
 )
-from params import set_description, generate_type_marks, set_type_marks
+from type_params import set_description, generate_type_marks, set_type_marks
 from utils import convert_ft_to_mm, created_on, get_size
 
 __all__  = [
