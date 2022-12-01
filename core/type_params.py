@@ -30,7 +30,7 @@ def set_type_marks(elem_types, type_marks):
     :param type_marks: the list of type marks for each element types
     :returns: the retrieved type mark values set for the element types
     """
-    param_name = 'Type Mark'
-    map(lambda et, tm: et.LookupParameter(param_name).Set(tm), elem_types, type_marks)
+    bip = BuiltInParameter.ALL_MODEL_TYPE_MARK
+    map(lambda et, tm: et.get_Parameter(bip).Set(tm), elem_types, type_marks)
 
-    return map(lambda et: et.LookupParameter(param_name).AsString())
+    return map(lambda et: et.get_Parameter(bip).AsString())
