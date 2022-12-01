@@ -4,7 +4,6 @@ clr.AddReference('RevitAPI')
 
 from Autodesk.Revit.DB import *
 from utils import created_on
-from datetime import datetime
 
 
 """
