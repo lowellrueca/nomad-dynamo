@@ -13,7 +13,7 @@ def sort_hss(family, base, depth, thickness):
     :param family: a family class of an HSS shape object.
     :returns: list of element types of shs and rhs.
     """
-    element_types = elements_of_element_types(family)
+    element_types = element_types_of_family(family)
     sz = {'b': base, 'd': depth, 't': thickness}
     sort_by_size = lambda e: (convert_ft_to_mm(e, sz['b']), convert_ft_to_mm(e, sz['h']), convert_ft_to_mm(e, sz['t']))
 
