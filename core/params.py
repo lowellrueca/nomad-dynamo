@@ -1,6 +1,15 @@
 """
 This module handles the revit's built in parameters
 """
+import clr
+
+clr.AddReference('RevitAPI')
+
+from Autodesk.Revit.DB import BuiltInParameter
+
+
+bip_type_mark = BuiltInParameter.ALL_MODEL_TYPE_MARK
+bip_description = BuiltInParameter.ALL_MODEL_DESCRIPTION
 
 def set_description(elem_types, descriptions):
     """
@@ -15,7 +24,7 @@ def set_description(elem_types, descriptions):
 
     return map(lambda et: et.get_Parameter(bip).AsString())
 
-def set_type_marks(elem_types):
+def set_type_marks(elem_types, add_key=None):
     """
     Sets the values for Type Mark parameters of the element types
 
@@ -26,8 +35,10 @@ def set_type_marks(elem_types):
     get_key = lambda e: e.LookupParameter('Set Key').AsString()
     gen_num = lambda e: elem_types.IndexOf(e) + 1
     gen_type_mark = lambda e: str.format('{}-{}', get_key(e), gen_num(e))
+    gen_type_mark_w_add_key = lambda e: str.format('{}-{}-{}', get_key(e), add_key, gen_num(e))
 
-    bip = BuiltInParameter.ALL_MODEL_TYPE_MARK
-    map(lambda et: et.get_Parameter(bip).Set(gen_type_mark(et)), elem_types)
+    if add_key is not None:
+        map(lambda e: e.get_Parameter(bip_type_mark).Set(gen_type_mark_w_add_key(e)), elem_types)
 
-    return map(lambda et: et.get_Parameter(bip).AsString())
+    if add_key is None:
+        map(lambda e: e.get_Parameter(bip_type_mark).Set(gen_type_mark(e)), elem_types)
