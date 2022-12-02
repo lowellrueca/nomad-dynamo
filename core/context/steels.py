@@ -15,14 +15,14 @@ def sort_hss(family, base, depth, thickness):
     """
     element_types = element_types_of_family(family)
     sz = {'b': base, 'd': depth, 't': thickness}
-    sort_by_size = lambda e: (convert_ft_to_mm(e, sz['b']), convert_ft_to_mm(e, sz['h']), convert_ft_to_mm(e, sz['t']))
+    sort_by_size = lambda e: (convert_ft_to_mm(e, sz['b']), convert_ft_to_mm(e, sz['d']), convert_ft_to_mm(e, sz['t']))
 
     # sort shs types
-    shs_types = filter(lambda e: convert_ft_to_mm(e, sz['b']) == convert_ft_to_mm(e, sz['h']), element_types)
+    shs_types = filter(lambda e: convert_ft_to_mm(e, sz['b']) == convert_ft_to_mm(e, sz['d']), element_types)
     shs_types_by_sz = sorted(shs_types, key=lambda e: sort_by_size(e)) # sort shs types by sizes
 
     # sort rhs types
-    rhs_types = filter(lambda e: convert_ft_to_mm(e, sz['b']) != convert_ft_to_mm(e, sz['h']), element_types)
+    rhs_types = filter(lambda e: convert_ft_to_mm(e, sz['b']) != convert_ft_to_mm(e, sz['d']), element_types)
     rhs_types_by_sz = sorted(rhs_types, key=lambda e: sort_by_size(e))
 
     return  shs_types_by_sz, rhs_types_by_sz
