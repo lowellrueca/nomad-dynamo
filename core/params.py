@@ -19,10 +19,7 @@ def set_description(elem_types, descriptions):
     :param type_marks: the list of type marks for each element types
     :returns: the retrieved type mark values set for the element types
     """
-    bip = BuiltInParameter.ALL_MODEL_DESCRIPTION
-    map(lambda et, d: et.get_Parameter(bip).Set(d), elem_types, descriptions)
-
-    return map(lambda et: et.get_Parameter(bip).AsString())
+    map(lambda et, d: et.get_Parameter(bip_description).Set(d), elem_types, descriptions)
 
 def set_type_marks(elem_types, add_key=None):
     """
