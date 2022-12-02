@@ -32,7 +32,7 @@ def collect_element_types_by_category(category):
     :returns: element types of the category
     """
     element_types = FilteredElementCollector(__document__).OfCategoryId(category.Id).WhereElementIsElementType()
-    return element_types
+    return map(lambda et: et, element_types)
 
 def collect_elements_by_category(category):
     """
