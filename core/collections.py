@@ -1,3 +1,7 @@
+"""
+This module handles collecting different elements in the document.
+"""
+
 import clr
 
 clr.AddReference('RevitAPI')
