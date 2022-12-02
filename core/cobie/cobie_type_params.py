@@ -67,7 +67,7 @@ def set_cobie_type_description(et):
     description = et.get_Parameter(bip).AsString()
     et.LookupParameter(param_name).Set(description)
 
-def set_cobie_type_name(et):
+def set_type_marks(et):
     """
     Sets the value for COBie.Type.Name parameter
 
