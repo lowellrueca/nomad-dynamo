@@ -1,21 +1,7 @@
 import clr
 
-clr.AddReference('RevitAPI')
-
 from datetime import datetime
-from Autodesk.Revit.DB import DisplayUnitType, UnitUtils
-
-
-dut_ft = DisplayUnitType.DUT_DECIMAL_FEET
-dut_mm = DisplayUnitType.DUT_MILLIMETERS
-
-"""
-Converts dimension from decimal feet to mm
-
-:param el: the element or the element type
-:param pn: the parameter name
-"""
-convert_ft_to_mm = lambda el, pn: UnitUtils.Convert(el.LookupParameter(pn).AsDouble(), dut_ft, dut_mm)
+from params import get_length
 
 def created_on():
     """
@@ -51,9 +37,9 @@ def get_size(et, *args):
     res = ''
 
     if len(args) == 3:
-        res = str.format('{} x {} x {}', convert_ft_to_mm(et, args[0]), convert_ft_to_mm(et, args[1]), convert_ft_to_mm(et, args[2]))
+        res = str.format('{} x {} x {}', get_length(et, args[0]), get_length(et, args[1]), get_length(et, args[2]))
 
     else:
-        res = str.format('{} x {}', convert_ft_to_mm(et, args[0]), convert_ft_to_mm(et, args[1]))
+        res = str.format('{} x {}', get_length(et, args[0]), get_length(et, args[1]))
 
     return res
