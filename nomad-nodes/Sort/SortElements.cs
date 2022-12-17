@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Parameters;
 using Revit.Elements;
+using Sort.Internal;
 
 namespace Sort
 {
@@ -8,10 +9,10 @@ namespace Sort
     {
         public static IEnumerable<Element>? SortElementsByParameter(
             IEnumerable<Element> elements,
-            ParameterOfType parameterOfType,
+            DataOfType dataOfType,
             params string[] parameterNames)
         {
-            return SortElementManager.SortElementsByParameter(elements, parameterOfType, parameterNames);
+            return SortManager.SortElementsByParameter(elements, dataOfType, parameterNames);
         }
     }
 }

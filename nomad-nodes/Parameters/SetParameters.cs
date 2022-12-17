@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using Nomad.Settings;
+using Parameters.Internal;
 using Revit.Elements;
 using DM = RevitServices.Persistence.DocumentManager;
 using TM = RevitServices.Transactions.TransactionManager;
@@ -14,7 +15,7 @@ namespace Parameters
             IEnumerable<Element> elements,
             string parameterName,
             object data,
-            ParameterOfType parameterOfType)
+            DataOfType dataOfType)
         {
             bool result = false;
 
@@ -26,7 +27,7 @@ namespace Parameters
                 TM.Instance.EnsureInTransaction(doc);
 
                 // initialize updating data
-                ParameterUpdater.SetParameterValue(elements, parameterName, data, parameterOfType);
+                ParameterUpdater.SetParameterValue(elements, parameterName, data, dataOfType);
 
                 result = true;
                 TM.Instance.TransactionTaskDone();
@@ -50,7 +51,7 @@ namespace Parameters
             IEnumerable<Element> elements,
             string parameterName,
             IEnumerable<object> data,
-            ParameterOfType parameterOfType)
+            DataOfType dataOfType)
         {
             bool result = false;
 
@@ -62,7 +63,7 @@ namespace Parameters
                 TM.Instance.EnsureInTransaction(doc);
 
                 // initialize updating data
-                ParameterUpdater.SetParameterValues(elements, parameterName, data, parameterOfType);
+                ParameterUpdater.SetParameterValues(elements, parameterName, data, dataOfType);
 
                 result = true;
                 TM.Instance.TransactionTaskDone();

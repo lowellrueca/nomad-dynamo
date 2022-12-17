@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Parameters;
 using Revit.Elements;
+using Filter.Internal;
 
 namespace Filter
 {
@@ -10,10 +11,10 @@ namespace Filter
             IEnumerable<Element> elements,
             string parameterName,
             object parameterValue,
-            ParameterOfType parameterOfType)
+            DataOfType dataOfType)
         {
-            return ElementFilterManager.FilterElementByParameterValue(
-                elements, parameterName, parameterValue, parameterOfType);
+            return FilterManager.FilterElementByParameterValue(
+                elements, parameterName, parameterValue, dataOfType);
         }
     }
 }
