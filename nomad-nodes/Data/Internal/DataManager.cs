@@ -1,8 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
-using Data.Internal;
 
-namespace Data
+namespace Data.Internal
 {
     static class DataManager
     {
