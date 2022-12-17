@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -34,6 +35,14 @@ namespace Data.Internal
                 default:
                     break;
             }
+        }
+
+        public static string GetCurrentDateTime()
+        {
+            var dateTimeNow = DateTime.Now;
+            var format = "yyyy-MM-ddTHH:mm:ss";
+            var result = dateTimeNow.ToString(format);
+            return result;
         }
     }
 }
