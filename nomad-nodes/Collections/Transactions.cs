@@ -7,9 +7,9 @@ using Revit.Elements;
 using DM = RevitServices.Persistence.DocumentManager;
 using TM = RevitServices.Transactions.TransactionManager;
 
-namespace Parameters
+namespace Collections
 {
-    public static class Elements
+    public static class Transactions
     {
         public static bool SetElementName(
             IEnumerable<Element> elements,

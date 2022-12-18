@@ -1,4 +1,4 @@
-namespace Parameters
+namespace Data
 {
     public enum DataOfType
     {

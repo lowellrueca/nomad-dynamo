@@ -1,11 +1,11 @@
 using System.Collections.Generic;
-using Parameters;
 using Revit.Elements;
-using Filter.Internal;
+using Collections.Internal;
+using Data;
 
-namespace Filter
+namespace Collections
 {
-    public static class FilterElements
+    public static class Filter
     {
         public static IEnumerable<Element>? ByParameterValue(
             IEnumerable<Element> elements,
@@ -13,7 +13,7 @@ namespace Filter
             object parameterValue,
             DataOfType dataOfType)
         {
-            return FilterManager.FilterElementByParameterValue(
+            return FilterHandler.FilterElementByParameterValue(
                 elements, parameterName, parameterValue, dataOfType);
         }
     }

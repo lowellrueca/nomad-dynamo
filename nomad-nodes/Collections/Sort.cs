@@ -1,18 +1,18 @@
 using System.Collections.Generic;
-using Parameters;
+using Data;
 using Revit.Elements;
-using Sort.Internal;
+using Collections.Internal;
 
-namespace Sort
+namespace Collections
 {
-    public static class SortElements
+    public static class Sort
     {
         public static IEnumerable<Element>? SortElementsByParameter(
             IEnumerable<Element> elements,
             DataOfType dataOfType,
             params string[] parameterNames)
         {
-            return SortManager.SortElementsByParameter(elements, dataOfType, parameterNames);
+            return SortHandler.SortElementsByParameter(elements, dataOfType, parameterNames);
         }
     }
 }

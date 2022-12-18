@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
-using Parameters;
 using DB = Autodesk.Revit.DB;
 using Revit.Elements;
 using Parameters.Internal;
+using Data;
 
-namespace Filter.Internal
+namespace Collections.Internal
 {
-    static class FilterManager
+    static class FilterHandler
     {
         public static IEnumerable<Element>? FilterElementByParameterValue(
             IEnumerable<Element> elements,
@@ -50,7 +50,7 @@ namespace Filter.Internal
             foreach (var e in elements)
             {
                 var param_ = e.InternalElement.LookupParameter(parameterName);
-                var double_ = ParameterManager.GetValueOfDouble(param_);
+                var double_ = ParameterValueHandler.GetDoubleValue(param_);
                 if (parameterValue == double_)
                 {
                     yield return e;
@@ -66,7 +66,7 @@ namespace Filter.Internal
             foreach (var e in elements)
             {
                 var param_ = e.InternalElement.LookupParameter(parameterName);
-                var elementId = ParameterManager.GetValueOfElementId(param_);
+                var elementId = ParameterValueHandler.GetElementIdValue(param_);
                 if (parameterValue == elementId)
                 {
                     yield return e;
@@ -81,7 +81,7 @@ namespace Filter.Internal
             foreach (var e in elements)
             {
                 var param_ = e.InternalElement.LookupParameter(parameterName);
-                var int_ = ParameterManager.GetValueOfInteger(param_);
+                var int_ = ParameterValueHandler.GetIntegerValue(param_);
                 if (parameterValue == int_)
                 {
                     yield return e;
@@ -96,7 +96,7 @@ namespace Filter.Internal
             foreach (var e in elements)
             {
                 var param_ = e.InternalElement.LookupParameter(parameterName);
-                var text = ParameterManager.GetValueOfText(param_);
+                var text = ParameterValueHandler.GetStringValue(param_);
                 if (parameterValue.Contains(text))
                 {
                     yield return e;

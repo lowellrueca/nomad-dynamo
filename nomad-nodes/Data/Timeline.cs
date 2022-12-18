@@ -4,9 +4,11 @@ namespace Data
 {
     public static class Timeline
     {
-        public static string GetCurrentDateTime()
-        {
-            return DataManager.GetCurrentDateTime();
-        }
+        public static string DateTime { 
+            get
+            {
+                return DataManager.GetCurrentDateTime();
+            } 
+        }    
     }
 }

@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Parameters;
 using Parameters.Internal;
 using Revit.Elements;
 
@@ -17,7 +16,7 @@ namespace Context
         {
             Func<Element, string, double> convert = (el, pn) =>
             {
-                return Convert.ToDouble(ParameterManager.GetParameterValueByDouble(el, pn));
+                return Convert.ToDouble(ParameterLookupValueHandler.GetDoubleValue(el, pn));
             };
 
             foreach (var e in elements.ToList())

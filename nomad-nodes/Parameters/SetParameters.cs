@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using Data;
 using Nomad.Settings;
 using Parameters.Internal;
 using Revit.Elements;
@@ -27,7 +28,7 @@ namespace Parameters
                 TM.Instance.EnsureInTransaction(doc);
 
                 // initialize updating data
-                ParameterUpdater.SetParameterValue(elements, parameterName, data, dataOfType);
+                ParameterSetHandler.SetParameterValue(elements, parameterName, data, dataOfType);
 
                 result = true;
                 TM.Instance.TransactionTaskDone();
@@ -63,7 +64,7 @@ namespace Parameters
                 TM.Instance.EnsureInTransaction(doc);
 
                 // initialize updating data
-                ParameterUpdater.SetParameterValues(elements, parameterName, data, dataOfType);
+                ParameterSetHandler.SetParameterValues(elements, parameterName, data, dataOfType);
 
                 result = true;
                 TM.Instance.TransactionTaskDone();
