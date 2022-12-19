@@ -24,5 +24,12 @@ namespace Collections
         {
             return FilterHandler.FilterElementsWithEqualXYParameter(elements, parameterNameX, parameterNameY);
         }
+        public static IEnumerable<Element> FilterElementsWithUnEqualXYParameter(
+            IEnumerable<Element> elements,
+            string parameterNameX,
+            string parameterNameY)
+        {
+            return FilterHandler.FilterElementsWithUnEqualXYParameter(elements, parameterNameX, parameterNameY);
+        }
     }
 }
