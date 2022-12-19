@@ -16,5 +16,13 @@ namespace Collections
             return FilterHandler.FilterElementByParameterValue(
                 elements, parameterName, parameterValue, dataOfType);
         }
+
+        public static IEnumerable<Element> FilterElementsWithEqualXYParameter(
+            IEnumerable<Element> elements,
+            string parameterNameX,
+            string parameterNameY)
+        {
+            return FilterHandler.FilterElementsWithEqualXYParameter(elements, parameterNameX, parameterNameY);
+        }
     }
 }

@@ -103,5 +103,44 @@ namespace Collections.Internal
                 }
             }
         }
+
+        public static IEnumerable<Element> FilterElementsWithEqualXYParameter(
+            IEnumerable<Element> elements,
+            string parameterNameX,
+            string parameterNameY)
+        {
+            foreach (var e in elements)
+            {
+                var paramX = e.InternalElement.LookupParameter(parameterNameX);
+                var paramY = e.InternalElement.LookupParameter(parameterNameY);
+                var storageType = paramX.StorageType == paramY.StorageType ? paramX.StorageType : DB.StorageType.None;
+
+                switch (storageType)
+                {
+                    case DB.StorageType.Double:
+                        if (ParameterValueHandler.GetDoubleValue(paramX).Equals(ParameterValueHandler.GetDoubleValue(paramY)))
+                        { yield return e; }
+                        break;
+
+                    case DB.StorageType.ElementId:
+                        if (ParameterValueHandler.GetElementIdValue(paramX).Equals(ParameterValueHandler.GetElementIdValue(paramY)))
+                        { yield return e; }
+                        break;
+
+                    case DB.StorageType.Integer:
+                        if (ParameterValueHandler.GetIntegerValue(paramX).Equals(ParameterValueHandler.GetIntegerValue(paramY)))
+                        { yield return e; }
+                        break;
+
+                    case DB.StorageType.String:
+                        if (ParameterValueHandler.GetStringValue(paramX).Equals(ParameterValueHandler.GetStringValue(paramY)))
+                        { yield return e; }
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+        }
     }
 }
