@@ -31,6 +31,8 @@ namespace Parameters.Internal
                 }
             };
 
+            // this function is needed to be isolated in order to flatten the list
+            // from GetOrderedParameters of element list.
             Action<List<DB.Parameter>> addToParamDatas = (params_) =>
             {
                 foreach(DB.Parameter p in params_)
