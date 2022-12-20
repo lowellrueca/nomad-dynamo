@@ -179,5 +179,46 @@ namespace Collections.Internal
                 }
             }
         }
+        public static IEnumerable<Element> FilterElementsByStringQuery(IEnumerable<Element> elements, string parameterName, string parameterValue, StringQuery stringQuery)
+        {
+            switch(stringQuery)
+            {
+                case StringQuery.Contains:
+                    foreach(var e in elements)
+                    {
+                        var paramValue = ParameterLookupValueHandler.GetStringValue(e, parameterName);
+                        if(paramValue.Contains(parameterValue))
+                        {
+                            yield return e;
+                        }
+                    }
+                    break;
+
+                case StringQuery.Equals:
+                    foreach(var e in elements)
+                    {
+                        var paramValue = ParameterLookupValueHandler.GetStringValue(e, parameterName);
+                        if(paramValue.Equals(parameterValue))
+                        {
+                            yield return e;
+                        }
+                    }
+                    break;
+
+                case StringQuery.StartsWith:
+                    foreach(var e in elements)
+                    {
+                        var paramValue = ParameterLookupValueHandler.GetStringValue(e, parameterName);
+                        if(paramValue.StartsWith(parameterValue))
+                        {
+                            yield return e;
+                        }
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+        }
     }
 }

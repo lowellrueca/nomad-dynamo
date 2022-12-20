@@ -31,5 +31,9 @@ namespace Collections
         {
             return FilterHandler.FilterElementsWithUnEqualXYParameter(elements, parameterNameX, parameterNameY);
         }
+        public static IEnumerable<Element> FilterElementsByStringQuery(IEnumerable<Element> elements, string parameterName, string parameterValue, StringQuery stringQuery)
+        {
+            return FilterHandler.FilterElementsByStringQuery(elements, parameterName, parameterValue, stringQuery);
+        }
     }
 }
