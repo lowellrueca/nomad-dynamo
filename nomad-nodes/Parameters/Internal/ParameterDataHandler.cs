@@ -9,13 +9,13 @@ namespace Parameters.Internal
 {
     class ParameterDataHandler
     {
-        public static ParameterData GetParameterData(ParameterData parameterData, Element element, string parameterName)
+        public static ParameterData GetParameterData(Element element, string parameterName)
         {
             var parameter = element.InternalElement.LookupParameter(parameterName);
-            return ParameterToParameterData(parameterData, parameter);
+            return ParameterToParameterData(parameter);
         }
 
-        public static IEnumerable<ParameterData> GetParameterData(ParameterData parameterData, Element element, DataOfType dataOfType)
+        public static IEnumerable<ParameterData> GetParameterData(Element element, DataOfType dataOfType)
         {
             List<ParameterData> parameterDatas = new List<ParameterData>();
             List<DB.Parameter> parameters = new List<DB.Parameter>();
@@ -31,11 +31,11 @@ namespace Parameters.Internal
                 }
             };
 
-            Action<ParameterData, List<DB.Parameter>> addToParamDatas = (paramData, params_) =>
+            Action<List<DB.Parameter>> addToParamDatas = (params_) =>
             {
                 foreach(DB.Parameter p in params_)
                 {
-                    parameterDatas.Add(ParameterToParameterData(paramData, p));
+                    parameterDatas.Add(ParameterToParameterData(p));
                 }
             };
 
@@ -43,31 +43,31 @@ namespace Parameters.Internal
             {
                 case DataOfType.Double:
                     getParametersByStorageType(element, DB.StorageType.Double);
-                    addToParamDatas(parameterData, parameters);
+                    addToParamDatas(parameters);
                     break;
 
                 case DataOfType.ElementId:
                     getParametersByStorageType(element, DB.StorageType.ElementId);
-                    addToParamDatas(parameterData, parameters);
+                    addToParamDatas(parameters);
                     break;
                     
                 case DataOfType.Integer:
                     getParametersByStorageType(element, DB.StorageType.Integer);
-                    addToParamDatas(parameterData, parameters);
+                    addToParamDatas(parameters);
                     break;
                     
                 default:
                     getParametersByStorageType(element, DB.StorageType.String);
-                    addToParamDatas(parameterData, parameters);
+                    addToParamDatas(parameters);
                     break;
             }
             
             return parameterDatas.Where(p => p.Parameter != null);
         }
 
-        public static ParameterData ParameterToParameterData(ParameterData parameterData, DB.Parameter parameter)
+        public static ParameterData ParameterToParameterData(DB.Parameter parameter)
         {
-            parameterData = new ParameterData 
+            ParameterData parameterData = new ParameterData 
             {
                 Parameter = parameter,
                 Element = parameter.Element.ToDSType(true),

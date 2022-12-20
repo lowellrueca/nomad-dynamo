@@ -17,23 +17,22 @@ namespace Parameters
         public DB.ElementId? ElementId { get; set; }
         public int Integer { get; set; }
         public string? String { get; set; }
+        internal ParameterData() { }
         public static IEnumerable<Element> GetDistinctElements(IEnumerable<IEnumerable<ParameterData>> parameterDatas)
         {
             return ParameterElementHandler.GetElements(parameterDatas);
         }
         public static ParameterData ParameterDataOfParameter(
-            ParameterData parameterData,
             Element element,
             string parameterName)
         {
-            return ParameterDataHandler.GetParameterData(parameterData, element, parameterName);
+            return ParameterDataHandler.GetParameterData(element, parameterName);
         }
         public static IEnumerable<ParameterData> GetParameterDataOfElement(
-            ParameterData parameterData,
             Element element,
             DataOfType dataOfType)
         {
-            foreach(var p in ParameterDataHandler.GetParameterData(parameterData, element, dataOfType))
+            foreach(var p in ParameterDataHandler.GetParameterData(element, dataOfType))
             {
                 yield return p;
             }
