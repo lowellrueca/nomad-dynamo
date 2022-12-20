@@ -34,9 +34,12 @@ namespace Collections.Internal
                     elements_ = FilterElementByDataTypeOfInteger(elements, parameterName, int_).ToList();
                     break;
 
-                default:
+                case DataOfType.String:
                     var text = (string)parameterValue;
                     elements_ = FilterElementByDataTypeOfString(elements, parameterName, text).ToList();
+                    break;
+
+                default:
                     break;
             }
             return elements_;
