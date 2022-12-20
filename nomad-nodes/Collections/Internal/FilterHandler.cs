@@ -80,9 +80,8 @@ namespace Collections.Internal
         {
             foreach (var e in elements)
             {
-                var param_ = e.InternalElement.LookupParameter(parameterName);
-                var int_ = ParameterValueHandler.GetIntegerValue(param_);
-                if (parameterValue == int_)
+                var paramValue = ParameterLookupValueHandler.GetIntegerValue(e, parameterName);
+                if (paramValue == parameterValue)
                 {
                     yield return e;
                 }
