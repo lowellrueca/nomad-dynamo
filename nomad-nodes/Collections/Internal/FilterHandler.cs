@@ -36,7 +36,7 @@ namespace Collections.Internal
 
                 default:
                     var text = (string)parameterValue;
-                    elements_ = FilterElementByDataTypeOfText(elements, parameterName, text).ToList();
+                    elements_ = FilterElementByDataTypeOfString(elements, parameterName, text).ToList();
                     break;
             }
             return elements_;
@@ -88,7 +88,7 @@ namespace Collections.Internal
                 }
             }
         }
-        public static IEnumerable<Element> FilterElementByDataTypeOfText(
+        public static IEnumerable<Element> FilterElementByDataTypeOfString(
             IEnumerable<Element> elements,
             string parameterName,
             string parameterValue)
