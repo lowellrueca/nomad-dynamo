@@ -95,9 +95,8 @@ namespace Collections.Internal
         {
             foreach (var e in elements)
             {
-                var param_ = e.InternalElement.LookupParameter(parameterName);
-                var text = ParameterValueHandler.GetStringValue(param_);
-                if (parameterValue.Contains(text))
+                var paramValue = ParameterLookupValueHandler.GetStringValue(e, parameterName);
+                if (paramValue.Contains(parameterValue))
                 {
                     yield return e;
                 }
