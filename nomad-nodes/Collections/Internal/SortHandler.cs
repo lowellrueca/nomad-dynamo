@@ -29,8 +29,11 @@ namespace Collections.Internal
                     elems_ = elements.OrderBy(e => ParameterLookupValueHandler.GetIntegerValue(e, parameterNames[0]));
                     break;
 
-                default:
+                case DataOfType.String:
                     elems_ = elements.OrderBy(e => ParameterLookupValueHandler.GetStringValue(e, parameterNames[0]));
+                    break;
+
+                default:
                     elems_ = null;
                     break;
             }
