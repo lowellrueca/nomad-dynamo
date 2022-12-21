@@ -15,6 +15,11 @@
                 "reveal": "silent",
                 "close": true
             },
+            "windows": {
+                "command": "C:\\Program Files\\Autodesk\\Revit 2019\\Revit.exe",
+                "args": [
+                ]
+            },
             "problemMatcher": "$msCompile"
         },
         {
