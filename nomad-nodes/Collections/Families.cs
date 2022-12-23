@@ -21,7 +21,7 @@ namespace Collections
                     .Where(f => f.IsInPlace.Equals(false) && f.FamilyCategoryId.Equals(cat.Id))
                     .ToList();
 
-            foreach(var fam in fams)
+            foreach (var fam in fams)
             {
                 yield return (Family)fam.ToDSType(true);
             }
