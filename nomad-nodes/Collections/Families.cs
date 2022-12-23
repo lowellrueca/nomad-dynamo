@@ -21,6 +21,8 @@ namespace Collections
                     .Where(f => f.IsInPlace.Equals(false) && f.FamilyCategoryId.Equals(cat.Id))
                     .ToList();
 
+            fams.Sort((x, y) => x.Name.CompareTo(y.Name));
+
             foreach (var fam in fams)
             {
                 yield return (Family)fam.ToDSType(true);
