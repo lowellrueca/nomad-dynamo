@@ -30,12 +30,13 @@ namespace Collections
                 yield return (FamilyType)famsymbol.ToDSType(true);
             }
         }
-
         public static IEnumerable<FamilyType> ElementTypesOfFamily(Element family)
         {
             var fam = (Family)family;
+            var famTypes = fam.Types.ToList();
+            famTypes.Sort(new FamilyTypeComparer());
 
-            foreach (var famType in fam.Types.ToList())
+            foreach (var famType in famTypes)
             {
                 yield return famType;
             }
