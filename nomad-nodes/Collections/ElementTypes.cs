@@ -3,6 +3,7 @@ using DB = Autodesk.Revit.DB;
 using Revit.Elements;
 using RevitServices.Persistence;
 using System.Linq;
+using Collections.Internal;
 
 namespace Collections
 {
@@ -21,6 +22,8 @@ namespace Collections
                     .Cast<DB.FamilySymbol>()
                     .Where(f => f.Family.IsInPlace.Equals(false) && f.Family.IsEditable.Equals(true))
                     .ToList();
+
+            famSymbols.Sort(new FamilySymbolComparer());
 
             foreach (var famsymbol in famSymbols)
             {
