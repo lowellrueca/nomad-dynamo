@@ -3,6 +3,7 @@ using DB = Autodesk.Revit.DB;
 using Revit.Elements;
 using RevitServices.Persistence;
 using System.Linq;
+using Collections.Internal;
 
 namespace Collections
 {
@@ -21,7 +22,7 @@ namespace Collections
                     .Where(f => f.IsInPlace.Equals(false) && f.FamilyCategoryId.Equals(cat.Id))
                     .ToList();
 
-            fams.Sort((x, y) => x.Name.CompareTo(y.Name));
+            fams.Sort(new FamilyComparer());
 
             foreach (var fam in fams)
             {
@@ -41,6 +42,8 @@ namespace Collections
                     .Cast<DB.Family>()
                     .Where(f => f.IsInPlace.Equals(true) && f.FamilyCategoryId.Equals(cat.Id))
                     .ToList();
+
+            fams.Sort(new FamilyComparer());
 
             foreach (var fam in fams)
             {
