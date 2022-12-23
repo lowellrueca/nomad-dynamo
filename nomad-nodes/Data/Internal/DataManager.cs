@@ -44,5 +44,14 @@ namespace Data.Internal
             var result = dateTimeNow.ToString(format);
             return result;
         }
+
+        public static IEnumerable<object> FlattenList(IEnumerable<IEnumerable<object>> data)
+        {
+            IEnumerable<object> data_ = data.SelectMany(d => d);
+            foreach (var d in data_)
+            {
+                yield return d;
+            }
+        }
     }
 }

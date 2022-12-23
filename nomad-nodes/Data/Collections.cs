@@ -16,5 +16,10 @@ namespace Data
         {
             return DataManager.JoinDataSets(delimeter, dataset);
         }
+
+        public static IEnumerable<object> FlattenList(IEnumerable<IEnumerable<object>> data)
+        {
+            return DataManager.FlattenList(data);
+        }
     }
 }
