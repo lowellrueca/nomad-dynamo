@@ -8,16 +8,9 @@
             "name": "Debug",
             "type": "clr",
             "request": "attach",
-            "processId": "${command:pickProcess}",
+            "processName": "Revit",
             "justMyCode": true,
             "preLaunchTask": "launch-revit",
         },
-    ],
-    "inputs": [
-        {
-            "id": "pickProcess",
-            "description": "select a process",
-            "type": "promptString",
-        }
     ],
 }
