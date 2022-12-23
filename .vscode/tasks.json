@@ -45,7 +45,10 @@
         {
             "label": "launch-revit",
             "type": "shell",
-            "command": "C:\\Program Files\\Autodesk\\Revit 2019\\Revit.exe",
+            "command": "Start-Process",
+            "args": [
+                "C:\\Program Files\\Autodesk\\Revit 2019\\Revit.exe"
+            ],
             "presentation": {
                 "clear": false,
                 "close": true,
