@@ -5,12 +5,19 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "RevitDynamo",
+            "name": "Debug",
             "type": "clr",
             "request": "attach",
-            "processName": "C:\\Program Files\\Autodesk\\Revit 2019\\Revit.exe",
+            "processId": "${command:pickProcess}",
             "justMyCode": true,
-            "preLaunchTask": "build",
+            "preLaunchTask": "launch-revit",
+        },
+    ],
+    "inputs": [
+        {
+            "id": "pickProcess",
+            "description": "select a process",
+            "type": "promptString",
         }
-    ]
+    ],
 }
