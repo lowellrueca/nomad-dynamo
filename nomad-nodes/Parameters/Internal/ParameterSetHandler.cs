@@ -37,9 +37,12 @@ namespace Parameters.Internal
                     getParam(elements, parameterName).ForEach(p => p.Set(dataOfInt));
                     break;
 
-                default:
+                case DataOfType.String:
                     var stringdata = (string)data;
                     getParam(elements, parameterName).ForEach(p => p.Set(stringdata));
+                    break;
+                    
+                default:
                     break;
             }
         }
@@ -80,12 +83,15 @@ namespace Parameters.Internal
                     foreach (var (p, d) in dataOfInts) { p.Set(d); }
                     break;
 
-                default:
+                case DataOfType.String:
                     var defaultData = convertToStrings(data);
                     IEnumerable<(DB.Parameter, string)> defaultDatas = elements.Zip(defaultData, (e, d) =>
                                         (e.InternalElement.LookupParameter(parameterName), d)).ToList();
 
                     foreach (var (p, d) in defaultDatas) { p.Set(d); }
+                    break;
+
+                default:
                     break;
             }
         }
