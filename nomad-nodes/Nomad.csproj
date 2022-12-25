@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net48</TargetFramework>
@@ -23,5 +23,13 @@
       <HintPath>C:\Program Files\Dynamo\Dynamo Revit\1.3\Revit_2019\RevitServices.dll</HintPath>
     </Reference>
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\nomad-core\NomadCore.csproj" />
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="copy $(OutDir)$(TargetName).dll &quot;%25programdata%25\Dynamo\Dynamo Revit\1.3\packages\nomad&quot;" />
+  </Target>
 
 </Project>
