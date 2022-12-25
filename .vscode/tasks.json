@@ -19,9 +19,9 @@
         {
             "label": "launch-revit",
             "type": "shell",
-            "command": "Start-Process",
+            "command": "start",
             "args": [
-                "C:\\Program Files\\Autodesk\\Revit 2019\\Revit.exe",
+                "%programfiles%\\Autodesk\\Revit 2019\\Revit.exe",
                 "${input:projectModel}"
             ],
             "presentation": {
