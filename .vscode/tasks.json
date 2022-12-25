@@ -21,7 +21,8 @@
             "type": "shell",
             "command": "Start-Process",
             "args": [
-                "C:\\Program Files\\Autodesk\\Revit 2019\\Revit.exe"
+                "C:\\Program Files\\Autodesk\\Revit 2019\\Revit.exe",
+                "${input:projectModel}"
             ],
             "presentation": {
                 "clear": false,
@@ -36,4 +37,11 @@
             "problemMatcher": []
         }
     ],
+    "inputs": [
+        {
+            "id": "projectModel",
+            "type": "promptString",
+            "description": "revit project file to be opened"
+        }
+    ]
 }
