@@ -6,41 +6,15 @@
         {
             "label": "build",
             "type": "shell",
-            "command": "dotnet",
-            "args": [
-                "build",
-            ],
-            "group": "build",
+            "command": "msbuild",
+            "args": ["${workspaceFolder}/NomadDynamo.sln"],
+            "problemMatcher": ["$msCompile"],
             "presentation": {
                 "clear": true,
                 "close": true,
                 "reveal": "silent",
-                "revealProblems": "onProblem",
-            },
-            "problemMatcher": "$msCompile"
-        },
-        {
-            "label": "postbuild",
-            "type": "shell",
-            "command": "cp",
-            "args": [
-                "-Path",
-                "${workspaceFolder}/nomad-nodes/obj/Debug/net48/Nomad.dll",
-                "-Destination",
-                "C:/ProgramData/Dynamo/Dynamo Revit/1.3/packages/nomad",
-                "-Force"
-            ],
-            "dependsOn": [
-                "build"
-            ],
-            "group": "build",
-            "presentation": {
-                "clear": true,
-                "close": true,
-                "reveal": "silent",
-                "revealProblems": "onProblem",
-            },
-            "problemMatcher": [],
+                "revealProblems": "onProblem"
+            }
         },
         {
             "label": "launch-revit",
@@ -57,7 +31,6 @@
             },
             "dependsOn": [
                 "build",
-                "postbuild"
             ],
             "group": "test",
             "problemMatcher": []
