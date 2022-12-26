@@ -2,8 +2,7 @@
   "profiles": {
     "Nomad": {
       "commandName": "Executable",
-      "executablePath": "C:\\Program Files\\Autodesk\\Revit 2019\\Revit.exe",
-      "commandLineArgs": "\"D:\\temp\\bim\\TestModel.rvt\""
+      "executablePath": "C:\\Program Files\\Autodesk\\Revit 2019\\Revit.exe"
     }
   }
 }
